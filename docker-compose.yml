@@ -1,0 +1,23 @@
+version: "3"
+
+networks:
+  common:
+    external: false
+
+volumes:
+  nginx:
+    driver: local
+
+services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    volumes:
+      - /var/www/html:/var/www/html
+      - nginx:/etc/nginx/
+      - /etc/letsencrypt/:/etc/letsencrypt
+    networks:
+      - common
+    ports:
+      - "80:80"
+      - "443:443"
